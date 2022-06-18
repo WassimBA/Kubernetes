@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+          env:
+            - name: TARGET
+              value: "Go Sample v1"
+  traffic:
+  - percent: 0
+    revisionName: example-service-1
+    tag: staging
+  - percent: 40
+    revisionName: example-service-2
+  - percent: 60
+    revisionName: example-service-3
