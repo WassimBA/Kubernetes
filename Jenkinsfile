@@ -15,7 +15,7 @@ pipeline {
 	 stage('deploy mysql'){
         steps{
 	dir("config"){
-	sh 'kubectl apply -f deploy-mysql.yaml '
+	sh 'kubectl apply -f deploy-sql.yaml '
 		}
 	}
 }
