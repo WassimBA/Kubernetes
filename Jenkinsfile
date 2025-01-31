@@ -15,14 +15,14 @@ pipeline {
 	 stage('deploy mysql'){
         steps{
 	dir("config"){
-	sh 'k apply -f deploy-mysql.yaml '
+	sh 'kubectl apply -f deploy-mysql.yaml '
 		}
 	}
 }
          stage('deploy app'){
         steps{
 	dir("config"){
-        sh 'k apply -f deploy-app.yaml '
+        sh 'kubectl apply -f deploy-app.yaml '
         	}
 	}
 }
