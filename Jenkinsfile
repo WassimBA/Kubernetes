@@ -1,5 +1,10 @@
 pipeline {
-    agent {"deploy"}
+    agent {
+	label "deploy"}
+
+
+
+
 	stages{
         stage ("Git checkout "){
             steps{
