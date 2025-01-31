@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpachat-app
+  labels:
+    app: tpachat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tpachat
+  template:
+    metadata:
+      labels:
+        app: tpachat
+    spec:
+      containers:
+        - name: tpachat-app
+          image: wassimba/tpachat:$BUILD_NUMBER
+          ports:
+            - containerPort: 8089
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql:3306/tpachato?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "mysql"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "mysql"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tpachat-app
+spec:
+  ports:
+    - port: 8089
+      targetPort: 8089
+  selector:
+    app: tpachat
